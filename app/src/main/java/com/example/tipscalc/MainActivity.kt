@@ -34,6 +34,20 @@ fun TipCalculatorScreen() {
     var tipPercent by remember { mutableStateOf(0f) }
     var selectedDiscount by remember { mutableStateOf(0) }
 
+    val dishCountInt = dishCount.toIntOrNull() ?: 0
+
+    val discountIndex = when {
+        dishCountInt > 10 -> 3
+        dishCountInt >= 6 -> 2
+        dishCountInt >= 3 -> 1
+        dishCountInt >= 1 -> 0
+        else -> 0
+    }
+
+    LaunchedEffect(dishCountInt) {
+        selectedDiscount = discountIndex
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
