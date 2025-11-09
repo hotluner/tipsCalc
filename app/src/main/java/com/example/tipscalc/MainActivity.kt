@@ -99,6 +99,31 @@ fun TipCalculatorScreen() {
                 }
             }
         }
+
+        val bill = billAmount.toDoubleOrNull() ?: 0.0
+        val tipAmount = bill * tipPercent / 100
+        val discountPercent = when (selectedDiscount) {
+            0 -> 3; 1 -> 5; 2 -> 7; else -> 10
+        }
+        val discountAmount = bill * discountPercent / 100
+        val total = bill + tipAmount - discountAmount
+
+        Column {
+            HorizontalDivider()
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Text("Чаевые:")
+                Text("%.2f".format(tipAmount))
+            }
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Text("Скидка:")
+                Text("-%.2f".format(discountAmount))
+            }
+            HorizontalDivider()
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Text("К оплате:")
+                Text("%.2f".format(total), style = MaterialTheme.typography.titleMedium)
+            }
+        }
     }
 }
 
