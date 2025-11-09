@@ -69,7 +69,22 @@ fun TipCalculatorScreen() {
         )
         Text("${tipPercent.toInt()}%")
 
-
+        // Скидка
+        Text("Скидка:")
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            listOf(3, 5, 7, 10).forEachIndexed { index, percent ->
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    RadioButton(
+                        selected = selectedDiscount == index,
+                        onClick = null // Программный выбор
+                    )
+                    Text("$percent%")
+                }
+            }
+        }
     }
 }
 
